@@ -60,6 +60,7 @@ public:
 
 	void resize()
 	{
+		// log calls
 		this->resizeMethodCalled++;
 
 		// keep old size
@@ -71,16 +72,24 @@ public:
 		// create new array
 		int *newArray = new int[this->size];
 
-		// zero-memory
-		memset(newArray, 0x00, this->size);
-
-		// copy old values to the new array
-		for (int i = 0; i < oldSize; i++) {
+		// populate
+		for (int i=0;i<oldSize;i++) 
 			newArray[i] = this->array[i];
-		}
-
+		
 		// set array as the new
 		this->array = newArray;
+	}
+
+	void shrink() {
+
+	}
+
+	int peek() {
+		return this->array[this->totalElements - 1];
+	}
+
+	int pop() {
+		return this->array[--this->totalElements];
 	}
 
 	void push(int item)
@@ -119,7 +128,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	std::cout << "resize method called: " << stack.getResizeMethodCalled() << " times.\n";
-
+	std::cout << "peek: " << stack.peek() << "\n";
+	std::cout << "pop: " << stack.pop() << "\n";
+	std::cout << "peek: " << stack.peek() << "\n";
 	//stack.print();
 
 	
